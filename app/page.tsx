@@ -1,8 +1,6 @@
 export default function Home() {
-	const token = process.env.TOKEN;
 	return (
 		<section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-			{token}
 			<form
 				action="http://localhost:4000/upload"
 				method="POST"
