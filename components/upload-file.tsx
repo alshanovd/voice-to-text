@@ -5,7 +5,6 @@ export const UploadFile = () => {
 
 	return (
 		<div>
-			{token}
 			<UploadForm token={token} />
 		</div>
 	);
