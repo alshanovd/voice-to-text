@@ -1,7 +1,6 @@
-"use client";
-
 import axios from "axios";
-import { createFlatAction } from "@/actions/AddTextAction";
+import { createText } from "@/actions/AddTextAction";
+import { AddTextComponent } from "./add-text";
 
 export const UploadForm = ({ token }: { token?: string }) => {
 	const form = new FormData();
@@ -22,10 +21,10 @@ export const UploadForm = ({ token }: { token?: string }) => {
 		form.append("file", event.target.files![0]);
 		form.append("model", "whisper-1");
 	};
-	const addTextAction = createFlatAction.bind(null, {});
+
 	return (
 		<>
-			<form action="">
+			{/* <form action="">
 				<input
 					type="file"
 					onChange={(e) => appendFile(e)}
@@ -35,14 +34,16 @@ export const UploadForm = ({ token }: { token?: string }) => {
 			</form>
 			<button type="button" onClick={() => upload()}>
 				upload
-			</button>
+			</button> */}
 
-			<form action={addTextAction}>
+			<form action={createText}>
 				<input type="text" name="filename" />
 				<input type="text" name="datetime" />
 				<input type="text" name="fullText" />
 				<button type="submit">submit</button>
 			</form>
+
+			<AddTextComponent />
 		</>
 	);
 };

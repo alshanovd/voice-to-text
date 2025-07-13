@@ -1,16 +1,19 @@
-import prisma from "@/prisma/prisma";
+"use server";
 
-export async function createFlatAction(_: unknown, formData: FormData) {
-	const data = {
-		filename: "filename",
-		datetime: Date(),
-		fullText: "text text",
-	};
-	const response = await prisma.text.create({ data });
-	// if (data.id) {
-	//   revalidatePath(`/settings/${response.id}`);
-	// } else {
-	//   redirect(`/settings/${response.id}`);
-	// }
-	//   redirect(`/settings`);
+import { PrismaClient } from "@/prisma/generated";
+
+const prisma = new PrismaClient();
+export async function createText(formData: FormData) {
+    const data = {
+        filename: "filename",
+        datetime: new Date().toISOString(),
+        fullText: "text text",
+    };
+    const response = await prisma.text.create({ data });
+    // if (data.id) {
+    //   revalidatePath(`/settings/${response.id}`);
+    // } else {
+    //   redirect(`/settings/${response.id}`);
+    // }
+    //   redirect(`/settings`);
 }
