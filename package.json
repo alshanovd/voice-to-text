@@ -4,10 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "prisma generate && npm run next build",
+    "build": "npm run generate && npm run next build",
     "start": "next start",
     "lint": "eslint --fix",
-    "generate": "vercel generate"
+    "generate": "prisma generate"
   },
   "dependencies": {
     "@heroui/button": "2.2.22",
