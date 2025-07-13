@@ -4,7 +4,7 @@ import {
     NavbarContent,
     NavbarItem,
 } from "@heroui/navbar";
-import { ChatIcon, HistoryIcon } from "./icons";
+import { VVTIcon } from "./icons";
 
 export const Navbar = () => {
     return (
@@ -15,11 +15,11 @@ export const Navbar = () => {
             >
                 <NavbarItem className="flex gap-10">
                     <Link href="/">
-                        <ChatIcon width="50px" height="50px" />
+                        <VVTIcon width="75px" height="75px" />
                     </Link>
-                    <Link href="/history">
+                    {/* <Link href="/history">
                         <HistoryIcon width="50px" height="50px" />
-                    </Link>
+                    </Link> */}
                 </NavbarItem>
             </NavbarContent>
         </HeroUINavbar>
