@@ -892,21 +892,21 @@ export namespace Prisma {
   export type TextMinAggregateOutputType = {
     id: number | null
     filename: string | null
-    datetime: Date | null
+    createdAt: Date | null
     fullText: string | null
   }
 
   export type TextMaxAggregateOutputType = {
     id: number | null
     filename: string | null
-    datetime: Date | null
+    createdAt: Date | null
     fullText: string | null
   }
 
   export type TextCountAggregateOutputType = {
     id: number
     filename: number
-    datetime: number
+    createdAt: number
     fullText: number
     _all: number
   }
@@ -923,21 +923,21 @@ export namespace Prisma {
   export type TextMinAggregateInputType = {
     id?: true
     filename?: true
-    datetime?: true
+    createdAt?: true
     fullText?: true
   }
 
   export type TextMaxAggregateInputType = {
     id?: true
     filename?: true
-    datetime?: true
+    createdAt?: true
     fullText?: true
   }
 
   export type TextCountAggregateInputType = {
     id?: true
     filename?: true
-    datetime?: true
+    createdAt?: true
     fullText?: true
     _all?: true
   }
@@ -1031,7 +1031,7 @@ export namespace Prisma {
   export type TextGroupByOutputType = {
     id: number
     filename: string
-    datetime: Date
+    createdAt: Date
     fullText: string
     _count: TextCountAggregateOutputType | null
     _avg: TextAvgAggregateOutputType | null
@@ -1057,32 +1057,32 @@ export namespace Prisma {
   export type TextSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     filename?: boolean
-    datetime?: boolean
+    createdAt?: boolean
     fullText?: boolean
   }, ExtArgs["result"]["text"]>
 
   export type TextSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     filename?: boolean
-    datetime?: boolean
+    createdAt?: boolean
     fullText?: boolean
   }, ExtArgs["result"]["text"]>
 
   export type TextSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     filename?: boolean
-    datetime?: boolean
+    createdAt?: boolean
     fullText?: boolean
   }, ExtArgs["result"]["text"]>
 
   export type TextSelectScalar = {
     id?: boolean
     filename?: boolean
-    datetime?: boolean
+    createdAt?: boolean
     fullText?: boolean
   }
 
-  export type TextOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "filename" | "datetime" | "fullText", ExtArgs["result"]["text"]>
+  export type TextOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "filename" | "createdAt" | "fullText", ExtArgs["result"]["text"]>
 
   export type $TextPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Text"
@@ -1090,7 +1090,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       filename: string
-      datetime: Date
+      createdAt: Date
       fullText: string
     }, ExtArgs["result"]["text"]>
     composites: {}
@@ -1517,7 +1517,7 @@ export namespace Prisma {
   interface TextFieldRefs {
     readonly id: FieldRef<"Text", 'Int'>
     readonly filename: FieldRef<"Text", 'String'>
-    readonly datetime: FieldRef<"Text", 'DateTime'>
+    readonly createdAt: FieldRef<"Text", 'DateTime'>
     readonly fullText: FieldRef<"Text", 'String'>
   }
     
@@ -1902,7 +1902,7 @@ export namespace Prisma {
   export const TextScalarFieldEnum: {
     id: 'id',
     filename: 'filename',
-    datetime: 'datetime',
+    createdAt: 'createdAt',
     fullText: 'fullText'
   };
 
@@ -1995,14 +1995,14 @@ export namespace Prisma {
     NOT?: TextWhereInput | TextWhereInput[]
     id?: IntFilter<"Text"> | number
     filename?: StringFilter<"Text"> | string
-    datetime?: DateTimeFilter<"Text"> | Date | string
+    createdAt?: DateTimeFilter<"Text"> | Date | string
     fullText?: StringFilter<"Text"> | string
   }
 
   export type TextOrderByWithRelationInput = {
     id?: SortOrder
     filename?: SortOrder
-    datetime?: SortOrder
+    createdAt?: SortOrder
     fullText?: SortOrder
   }
 
@@ -2012,14 +2012,14 @@ export namespace Prisma {
     OR?: TextWhereInput[]
     NOT?: TextWhereInput | TextWhereInput[]
     filename?: StringFilter<"Text"> | string
-    datetime?: DateTimeFilter<"Text"> | Date | string
+    createdAt?: DateTimeFilter<"Text"> | Date | string
     fullText?: StringFilter<"Text"> | string
   }, "id">
 
   export type TextOrderByWithAggregationInput = {
     id?: SortOrder
     filename?: SortOrder
-    datetime?: SortOrder
+    createdAt?: SortOrder
     fullText?: SortOrder
     _count?: TextCountOrderByAggregateInput
     _avg?: TextAvgOrderByAggregateInput
@@ -2034,53 +2034,53 @@ export namespace Prisma {
     NOT?: TextScalarWhereWithAggregatesInput | TextScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Text"> | number
     filename?: StringWithAggregatesFilter<"Text"> | string
-    datetime?: DateTimeWithAggregatesFilter<"Text"> | Date | string
+    createdAt?: DateTimeWithAggregatesFilter<"Text"> | Date | string
     fullText?: StringWithAggregatesFilter<"Text"> | string
   }
 
   export type TextCreateInput = {
     filename: string
-    datetime: Date | string
+    createdAt?: Date | string
     fullText: string
   }
 
   export type TextUncheckedCreateInput = {
     id?: number
     filename: string
-    datetime: Date | string
+    createdAt?: Date | string
     fullText: string
   }
 
   export type TextUpdateInput = {
     filename?: StringFieldUpdateOperationsInput | string
-    datetime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fullText?: StringFieldUpdateOperationsInput | string
   }
 
   export type TextUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     filename?: StringFieldUpdateOperationsInput | string
-    datetime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fullText?: StringFieldUpdateOperationsInput | string
   }
 
   export type TextCreateManyInput = {
     id?: number
     filename: string
-    datetime: Date | string
+    createdAt?: Date | string
     fullText: string
   }
 
   export type TextUpdateManyMutationInput = {
     filename?: StringFieldUpdateOperationsInput | string
-    datetime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fullText?: StringFieldUpdateOperationsInput | string
   }
 
   export type TextUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     filename?: StringFieldUpdateOperationsInput | string
-    datetime?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     fullText?: StringFieldUpdateOperationsInput | string
   }
 
@@ -2124,7 +2124,7 @@ export namespace Prisma {
   export type TextCountOrderByAggregateInput = {
     id?: SortOrder
     filename?: SortOrder
-    datetime?: SortOrder
+    createdAt?: SortOrder
     fullText?: SortOrder
   }
 
@@ -2135,14 +2135,14 @@ export namespace Prisma {
   export type TextMaxOrderByAggregateInput = {
     id?: SortOrder
     filename?: SortOrder
-    datetime?: SortOrder
+    createdAt?: SortOrder
     fullText?: SortOrder
   }
 
   export type TextMinOrderByAggregateInput = {
     id?: SortOrder
     filename?: SortOrder
-    datetime?: SortOrder
+    createdAt?: SortOrder
     fullText?: SortOrder
   }
 

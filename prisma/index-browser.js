@@ -120,7 +120,7 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 exports.Prisma.TextScalarFieldEnum = {
   id: 'id',
   filename: 'filename',
-  datetime: 'datetime',
+  createdAt: 'createdAt',
   fullText: 'fullText'
 };
 

@@ -5,12 +5,12 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
-  output   = "./generated"
+  output   = "./"
 }
 
 model Text {
-  id       Int      @id @default(autoincrement())
-  filename String
-  datetime DateTime
-  fullText String
+  id        Int      @id @default(autoincrement())
+  filename  String
+  createdAt DateTime @default(now())
+  fullText  String
 }
