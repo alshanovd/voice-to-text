@@ -12,5 +12,5 @@ model Text {
   id        Int      @id @default(autoincrement())
   filename  String
   createdAt DateTime @default(now())
-  fullText  String
+  fullText  String   @db.Text
 }
