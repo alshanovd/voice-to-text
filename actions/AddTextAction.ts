@@ -1,6 +1,6 @@
 "use server";
 
-import { PrismaClient } from "../prisma";
+import { PrismaClient } from "../prisma/generated";
 
 const prisma = new PrismaClient();
 export async function createText(formData: FormData) {
