@@ -9,6 +9,7 @@ export async function createText(formData: FormData) {
         fullText: formData.get("fullText") as string,
     };
     const response = await prisma.text.create({ data });
+
     // if (data.id) {
     //   revalidatePath(`/settings/${response.id}`);
     // } else {

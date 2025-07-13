@@ -64,7 +64,14 @@ export const UploadForm = ({ token }: { token?: string }) => {
                 value={loadingProgress}
             />
 
-            <AddTextForm text={text} />
+            <h2>
+                {loadingProgress > 0 &&
+                    loadingProgress < 100 &&
+                    "Uploading File"}
+                {loadingProgress === 100 && "Converting Audio to Text"}
+            </h2>
+
+            {/* <AddTextForm text={text} /> */}
             <ViewText text={text} />
         </>
     );

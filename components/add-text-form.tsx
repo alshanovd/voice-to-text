@@ -7,10 +7,11 @@ export const AddTextForm = ({ text }: { text: string }) => {
         if (text.length) ref.current?.click();
     }, [text]);
     return (
-        <form className="hidden" action={createText}>
+        <form action={createText}>
             <input type="text" name="filename" />
             <input type="text" name="datetime" />
-            <textarea name="fullText" value={text} readOnly></textarea>
+            {/* <textarea name="fullText" value={text}></textarea> */}
+            <textarea name="fullText"></textarea>
             <button type="submit" ref={ref}>
                 submit
             </button>
