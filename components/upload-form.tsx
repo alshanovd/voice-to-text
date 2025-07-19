@@ -1,16 +1,37 @@
 "use client";
 import { Button } from "@heroui/button";
+import { InputOtp } from "@heroui/input-otp";
 import { Progress } from "@heroui/progress";
 import axios from "axios";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AddTextForm } from "./add-text-form";
 import { ViewText } from "./view-text";
 
-export const UploadForm = ({ token }: { token?: string }) => {
+export const UploadForm = ({
+    token,
+    envPin,
+}: {
+    token?: string;
+    envPin?: string;
+}) => {
     const form = new FormData();
     const [loadingProgress, setLoadingProgress] = useState(0);
+    const [pin, setPin] = useState("");
     const [text, setText] = useState("");
     const ref = useRef<HTMLInputElement>(null);
+    const [debug, setDebug] = useState(false);
+
+    useEffect(() => {
+        const lsPin = localStorage.getItem("pin");
+        if (lsPin) {
+            setPin(lsPin);
+        }
+
+        const debug = localStorage.getItem("debug");
+        if (debug) {
+            setDebug(true);
+        }
+    }, []);
 
     const upload = async () => {
         const result = await axios<{ text: string }>({
@@ -22,7 +43,6 @@ export const UploadForm = ({ token }: { token?: string }) => {
                 "Content-Type": "multipart/form-data",
             },
             onUploadProgress(progressEvent) {
-                console.log(progressEvent, "progressEvent");
                 if (progressEvent.progress) {
                     setLoadingProgress(progressEvent.progress * 100);
                 }
@@ -32,16 +52,39 @@ export const UploadForm = ({ token }: { token?: string }) => {
         setLoadingProgress(0);
         // reset file input
     };
+
+    const post = async () => {
+        await axios("/api/text", {
+            method: "POST",
+            data: {
+                text: "text text",
+            },
+        });
+    };
+
+    const get = async () => {
+        await fetch("/api/text", {
+            method: "GET",
+        });
+    };
+
     const appendFile = (event: React.ChangeEvent<HTMLInputElement>) => {
         console.log(event.target.files, "event.target.files");
         // biome-ignore lint/style/noNonNullAssertion: allow here
         form.append("file", event.target.files![0]);
         form.append("model", "whisper-1");
+        form.append("response_format", "verbose_json");
     };
 
-    return (
+    const FileForm = () => (
         <>
             <h1>Please upload a file and press "Go"</h1>
+            {debug && (
+                <>
+                    <Button onPress={post}>post text</Button>
+                    <Button onPress={get}>get text</Button>
+                </>
+            )}
             <div>
                 <input
                     type="file"
@@ -54,6 +97,25 @@ export const UploadForm = ({ token }: { token?: string }) => {
                     Go
                 </Button>
             </div>
+        </>
+    );
+    return (
+        <>
+            {envPin === pin ? (
+                <FileForm />
+            ) : (
+                <>
+                    <h2>Enter PIN</h2>
+                    <InputOtp
+                        length={4}
+                        value={pin}
+                        onValueChange={(value) => {
+                            localStorage.setItem("pin", value);
+                            setPin(value);
+                        }}
+                    />
+                </>
+            )}
 
             <Progress
                 isStriped={loadingProgress !== 100}

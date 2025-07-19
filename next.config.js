@@ -1,8 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-    optimizePackageImports: [
-        '@prisma/client',
-    ]
-};
+const nextConfig = {};
 
 module.exports = nextConfig;
