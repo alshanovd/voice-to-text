@@ -1,16 +1,17 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "./generated"
+  schemaFolders = ["./prisma/generated"]
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
-  output   = "./generated"
-}
-
 model Text {
   id        Int      @id @default(autoincrement())
   filename  String
+  fullText  String
   createdAt DateTime @default(now())
-  fullText  String   @db.Text
 }

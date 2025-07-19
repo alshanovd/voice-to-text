@@ -1,4 +1,3 @@
-import type { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 import prisma from "../../../prisma/prisma";
 
@@ -6,19 +5,19 @@ type ResponseData = {
     message: string;
 };
 
-export async function GET(req: NextApiRequest) {
+export async function GET(req: Request) {
     return NextResponse.json(
         { message: "GET Hello from Next.js!" },
         { status: 200 },
     );
 }
 
-export async function POST(req: NextApiRequest) {
+export async function POST(req: Request) {
+    const body = await req.json();
     const respon = await prisma.text.create({
         data: {
             filename: "test",
-            fullText: req.body.text,
-            createdAt: new Date().toISOString(),
+            fullText: body.text,
         },
     });
     return NextResponse.json(respon, { status: 200 });
