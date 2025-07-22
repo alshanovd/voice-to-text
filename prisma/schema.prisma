@@ -11,7 +11,7 @@ datasource db {
 
 model Text {
   id        Int      @id @default(autoincrement())
-  filename  String
+  fileUrl  String
   fullText  String
   createdAt DateTime @default(now())
 }

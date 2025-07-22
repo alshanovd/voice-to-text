@@ -26,6 +26,7 @@
     "@prisma/client": "6.6.0",
     "@react-aria/ssr": "3.9.9",
     "@react-aria/visually-hidden": "3.8.24",
+    "@vercel/blob": "^1.1.1",
     "axios": "^1.10.0",
     "clsx": "2.1.1",
     "framer-motion": "11.13.1",
