@@ -1,13 +1,10 @@
 import { NextResponse } from "next/server";
 import prisma from "../../../prisma/prisma";
 
-type ResponseData = {
-    message: string;
-};
-
 export async function GET(req: Request) {
+    const text = await prisma.text.findFirst();
     return NextResponse.json(
-        { message: "GET Hello from Next.js!" },
+        text,
         { status: 200 },
     );
 }
@@ -16,7 +13,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const respon = await prisma.text.create({
         data: {
-            filename: "test",
+            fileUrl: body.fileUrl,
             fullText: body.text,
         },
     });

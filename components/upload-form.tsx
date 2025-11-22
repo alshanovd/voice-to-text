@@ -5,7 +5,6 @@ import { Progress } from "@heroui/progress";
 import { put } from "@vercel/blob";
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
-// import { AddTextForm } from "./add-text-form";
 import { ViewText } from "./view-text";
 
 export const UploadForm = ({
@@ -73,6 +72,7 @@ export const UploadForm = ({
             method: "POST",
             data: {
                 text: "text text",
+                fileUrl: "fileUrl bla bla",
             },
         });
     };
