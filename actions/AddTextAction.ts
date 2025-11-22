@@ -7,6 +7,7 @@ export async function createText(formData: FormData) {
     const data = {
         filename: formData.get("filename") as string,
         fullText: formData.get("fullText") as string,
+        fileUrl: formData.get("fileUrl") as string,
     };
     const response = await prisma.text.create({ data });
 
