@@ -9,9 +9,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Text {
+model Translation {
   id        Int      @id @default(autoincrement())
-  fileUrl  String
+  fileUrl   String
   fullText  String
   createdAt DateTime @default(now())
+  segments  Segment[]
+}
+
+model Segment {
+  id                Int           @id @default(autoincrement())
+  translation       Translation   @relation(fields: [translationId], references: [id])
+  translationId     Int
+  text              String
+  start             Float
+  end               Float
+  order             Int
 }

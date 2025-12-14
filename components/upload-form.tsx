@@ -4,7 +4,9 @@ import { InputOtp } from "@heroui/input-otp";
 import { Progress } from "@heroui/progress";
 import { put } from "@vercel/blob";
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import { useDebug } from "@/hooks/use-debug";
+import { usePin } from "@/hooks/use-pin";
 import { ViewText } from "./view-text";
 
 export const UploadForm = ({
@@ -18,24 +20,18 @@ export const UploadForm = ({
 }) => {
     const [form, setForm] = useState(new FormData());
     const [loadingProgress, setLoadingProgress] = useState(0);
-    const [pin, setPin] = useState("");
     const [text, setText] = useState("");
     const ref = useRef<HTMLInputElement>(null);
-    const [debug, setDebug] = useState(false);
+    const debug = useDebug();
     const [file, setFile] = useState<FileList[number]>();
-    const [info, setInfo] = useState<string>("");
+    const [pin, setPinValue] = usePin();
 
-    useEffect(() => {
-        const lsPin = localStorage.getItem("pin");
-        if (lsPin) {
-            setPin(lsPin);
-        }
-
-        const debug = localStorage.getItem("debug");
-        if (debug) {
-            setDebug(true);
-        }
-    }, []);
+    const post = async (text: string, fileUrl: string) => {
+        await axios("/api/text", {
+            method: "POST",
+            data: { text, fileUrl },
+        });
+    };
 
     const upload = async () => {
         const result = await axios<{ text: string }>({
@@ -55,26 +51,17 @@ export const UploadForm = ({
         setText(result.data.text);
         const { url } = await put(
             `${String(Date.now())}-${file?.name}`,
+            // biome-ignore lint/style/noNonNullAssertion: allow this file
             file!,
             {
                 access: "public",
                 token: fileToken,
             },
         );
+        await post(result.data.text, url);
         console.log(url, "url");
         setLoadingProgress(0);
-
         // reset file input
-    };
-
-    const post = async () => {
-        await axios("/api/text", {
-            method: "POST",
-            data: {
-                text: "text text",
-                fileUrl: "fileUrl bla bla",
-            },
-        });
     };
 
     const get = async () => {
@@ -100,7 +87,7 @@ export const UploadForm = ({
             <h1>Please upload a file and press "Go"</h1>
             {debug && (
                 <>
-                    <Button onPress={post}>post text</Button>
+                    {/* <Button onPress={post}>post text</Button> */}
                     <Button onPress={get}>get text</Button>
                 </>
             )}
@@ -142,10 +129,7 @@ export const UploadForm = ({
                     <InputOtp
                         length={4}
                         value={pin}
-                        onValueChange={(value) => {
-                            localStorage.setItem("pin", value);
-                            setPin(value);
-                        }}
+                        onValueChange={(value) => setPinValue(value)}
                     />
                 </>
             )}
