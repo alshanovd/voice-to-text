@@ -7,7 +7,7 @@ export async function createText(formData: FormData) {
         fullText: formData.get("fullText") as string,
         fileUrl: formData.get("fileUrl") as string,
     };
-    const response = await prisma.translation.create({ data });
+    const response = await prisma.transcript.create({ data });
 
     // if (data.id) {
     //   revalidatePath(`/settings/${response.id}`);

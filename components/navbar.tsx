@@ -4,7 +4,7 @@ import {
     NavbarContent,
     NavbarItem,
 } from "@heroui/navbar";
-import { House, NotebookPen, ScrollText, Star } from "lucide-react";
+import { Bookmark, House, NotebookPen, ScrollText } from "lucide-react";
 
 export const Navbar = () => {
     return (
@@ -20,11 +20,11 @@ export const Navbar = () => {
                     <Link href="/new-file">
                         <NotebookPen width="50px" height="50px" />
                     </Link>
-                    <Link href="/history">
+                    <Link href="/transcripts">
                         <ScrollText width="50px" height="50px" />
                     </Link>
-                    <Link href="/">
-                        <Star width="50px" height="50px" />
+                    <Link href="/bookmarks">
+                        <Bookmark width="50px" height="50px" />
                     </Link>
                 </NavbarItem>
             </NavbarContent>

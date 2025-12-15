@@ -9,7 +9,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Translation {
+model Transcript {
   id        Int      @id @default(autoincrement())
   fileUrl   String
   fullText  String
@@ -19,10 +19,12 @@ model Translation {
 
 model Segment {
   id                Int           @id @default(autoincrement())
-  translation       Translation   @relation(fields: [translationId], references: [id])
-  translationId     Int
+  transcript       Transcript   @relation(fields: [transcriptID], references: [id])
+  transcriptID     Int
   text              String
   start             Float
   end               Float
   order             Int
+  bookmark          Boolean
+  updatedAt         DateTime @default(now())
 }
