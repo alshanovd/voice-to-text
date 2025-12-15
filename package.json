@@ -24,7 +24,7 @@
     "@heroui/switch": "2.2.20",
     "@heroui/system": "2.4.18",
     "@heroui/theme": "2.4.17",
-    "@prisma/client": "^7.1.0",
+    "@prisma/client": "6.6.0",
     "@react-aria/ssr": "3.9.9",
     "@react-aria/visually-hidden": "3.8.24",
     "@vercel/blob": "^1.1.1",
