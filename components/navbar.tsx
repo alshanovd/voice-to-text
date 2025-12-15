@@ -15,7 +15,7 @@ export const Navbar = () => {
             >
                 <NavbarItem className="flex gap-10">
                     <Link href="/">
-                        <House width="75px" height="75px" />
+                        <House width="50px" height="50px" />
                     </Link>
                     <Link href="/new-file">
                         <NotebookPen width="50px" height="50px" />
@@ -24,7 +24,7 @@ export const Navbar = () => {
                         <ScrollText width="50px" height="50px" />
                     </Link>
                     <Link href="/">
-                        <Star width="75px" height="75px" />
+                        <Star width="50px" height="50px" />
                     </Link>
                 </NavbarItem>
             </NavbarContent>
