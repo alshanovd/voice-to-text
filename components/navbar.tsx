@@ -4,7 +4,7 @@ import {
     NavbarContent,
     NavbarItem,
 } from "@heroui/navbar";
-import { VVTIcon } from "./icons";
+import { House, NotebookPen, ScrollText, Star } from "lucide-react";
 
 export const Navbar = () => {
     return (
@@ -15,11 +15,17 @@ export const Navbar = () => {
             >
                 <NavbarItem className="flex gap-10">
                     <Link href="/">
-                        <VVTIcon width="75px" height="75px" />
+                        <House width="75px" height="75px" />
                     </Link>
-                    {/* <Link href="/history">
-                        <HistoryIcon width="50px" height="50px" />
-                    </Link> */}
+                    <Link href="/new-file">
+                        <NotebookPen width="50px" height="50px" />
+                    </Link>
+                    <Link href="/history">
+                        <ScrollText width="50px" height="50px" />
+                    </Link>
+                    <Link href="/">
+                        <Star width="75px" height="75px" />
+                    </Link>
                 </NavbarItem>
             </NavbarContent>
         </HeroUINavbar>
