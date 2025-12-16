@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function usePin(): [string, (v: string) => void] {
     const [pin, setPin] = useState("");

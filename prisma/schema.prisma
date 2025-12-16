@@ -10,21 +10,22 @@ datasource db {
 }
 
 model Transcript {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   fileUrl   String
-  fullText  String
-  createdAt DateTime @default(now())
+  text  String
+  createdAt DateTime  @default(now())
+  duration  Float
   segments  Segment[]
 }
 
 model Segment {
-  id                Int           @id @default(autoincrement())
-  transcript       Transcript   @relation(fields: [transcriptID], references: [id])
-  transcriptID     Int
-  text              String
-  start             Float
-  end               Float
-  order             Int
-  bookmark          Boolean
-  updatedAt         DateTime @default(now())
+  id           Int        @id @default(autoincrement())
+  transcript   Transcript @relation(fields: [transcriptID], references: [id])
+  transcriptID Int
+  text         String
+  start        Float
+  end          Float
+  order        Int
+  bookmark     Boolean
+  updatedAt    DateTime   @default(now())
 }

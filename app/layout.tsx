@@ -30,6 +30,7 @@ export default function RootLayout({
 }: {
     children: React.ReactNode;
 }) {
+    const envPin = process.env.PIN;
     return (
         <html suppressHydrationWarning lang="en">
             <head />
@@ -43,7 +44,7 @@ export default function RootLayout({
                     themeProps={{ attribute: "class", defaultTheme: "dark" }}
                 >
                     <div className="relative flex flex-col h-screen">
-                        <Navbar />
+                        <Navbar envPin={envPin} />
                         <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
                             {children}
                         </main>

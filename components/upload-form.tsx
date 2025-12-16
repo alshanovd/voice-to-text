@@ -7,6 +7,7 @@ import axios from "axios";
 import { useRef, useState } from "react";
 import { useDebug } from "@/hooks/use-debug";
 import { usePin } from "@/hooks/use-pin";
+import type { GPTSegment, GPTTranslation } from "@/models/translation";
 import { ViewText } from "./view-text";
 
 export const UploadForm = ({
@@ -26,15 +27,18 @@ export const UploadForm = ({
     const [file, setFile] = useState<FileList[number]>();
     const [pin, setPinValue] = usePin();
 
-    const post = async (text: string, fileUrl: string) => {
-        await axios("/api/text", {
+    const saveTranscript = async (
+        { text, segments }: GPTTranslation,
+        fileUrl: string,
+    ) => {
+        await axios("/api/translation", {
             method: "POST",
-            data: { text, fileUrl },
+            data: { text, fileUrl, segments },
         });
     };
 
     const upload = async () => {
-        const result = await axios<{ text: string }>({
+        const result = await axios<GPTTranslation>({
             method: "post",
             url: "https://api.openai.com/v1/audio/translations",
             data: form,
@@ -58,14 +62,14 @@ export const UploadForm = ({
                 token: fileToken,
             },
         );
-        await post(result.data.text, url);
+        await saveTranscript(result.data, url);
         console.log(url, "url");
         setLoadingProgress(0);
         // reset file input
     };
 
     const get = async () => {
-        await fetch("/api/text", {
+        await fetch("/api/translation", {
             method: "GET",
         });
     };
