@@ -2,13 +2,13 @@
 import { Button } from "@heroui/button";
 import { InputOtp } from "@heroui/input-otp";
 import { Progress } from "@heroui/progress";
-import { addToast, ToastProvider } from "@heroui/toast";
+import { addToast } from "@heroui/toast";
 import { put } from "@vercel/blob";
 import axios from "axios";
 import { useRef, useState } from "react";
 import { useDebug } from "@/hooks/use-debug";
 import { usePin } from "@/hooks/use-pin";
-import type { GPTSegment, GPTTranscript } from "@/models/transcript";
+import type { GPTTranscript } from "@/models/transcript";
 import { ViewText } from "./view-text";
 
 export const UploadForm = ({

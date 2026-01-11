@@ -1,5 +1,5 @@
 "use client";
-import { Skeleton } from "@heroui/skeleton";
+import { Spinner } from "@heroui/spinner";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import moment from "moment";
@@ -8,16 +8,13 @@ import type { PrismaTranscript } from "@/models/transcript";
 
 export default function TranscriptPage() {
     const { id } = useParams();
-    const { data, isLoading } = useQuery<{ data: PrismaTranscript }>({
+    const { data, isFetching } = useQuery<{ data: PrismaTranscript }>({
         queryKey: ["transcript"],
         queryFn: () => axios.get("/api/transcript", { params: { id } }),
     });
-    if (isLoading) {
-        return (
-            <Skeleton className="rounded-lg w-400">
-                <div className="h-5 rounded-lg bg-default-300" />
-            </Skeleton>
-        );
+
+    if (isFetching) {
+        return <Spinner className="mt-6" />;
     }
     const t = (data as { data: PrismaTranscript }).data;
     const duration = moment.utc(0).seconds(t.duration).format("m:ss");
