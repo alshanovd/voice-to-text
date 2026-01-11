@@ -2,15 +2,17 @@
 
 import { HeroUIProvider } from "@heroui/system";
 import { ToastProvider } from "@heroui/toast";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import type { ThemeProviderProps } from "next-themes";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type * as React from "react";
-
 export interface ProvidersProps {
     children: React.ReactNode;
     themeProps?: ThemeProviderProps;
 }
+
+const queryClient = new QueryClient();
 
 declare module "@react-types/shared" {
     interface RouterConfig {
@@ -24,9 +26,13 @@ export function Providers({ children, themeProps }: ProvidersProps) {
     const router = useRouter();
 
     return (
-        <HeroUIProvider navigate={router.push}>
-            <ToastProvider placement="top-right" />
-            <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>
-        </HeroUIProvider>
+        <QueryClientProvider client={queryClient}>
+            <HeroUIProvider navigate={router.push}>
+                <ToastProvider placement="top-right" />
+                <NextThemesProvider {...themeProps}>
+                    {children}
+                </NextThemesProvider>
+            </HeroUIProvider>
+        </QueryClientProvider>
     );
 }

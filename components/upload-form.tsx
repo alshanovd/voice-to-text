@@ -32,7 +32,7 @@ export const UploadForm = ({
         { segments, duration, text }: GPTTranscript,
         fileUrl: string,
     ) => {
-        await axios("/api/translation", {
+        await axios("/api/transcript", {
             method: "POST",
             data: { text, fileUrl, segments, duration },
         });
@@ -80,7 +80,7 @@ export const UploadForm = ({
     };
 
     const get = async () => {
-        await fetch("/api/translation", {
+        await fetch("/api/transcript", {
             method: "GET",
         });
     };
