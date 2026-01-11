@@ -2,12 +2,13 @@
 import { Button } from "@heroui/button";
 import { InputOtp } from "@heroui/input-otp";
 import { Progress } from "@heroui/progress";
+import { addToast, ToastProvider } from "@heroui/toast";
 import { put } from "@vercel/blob";
 import axios from "axios";
 import { useRef, useState } from "react";
 import { useDebug } from "@/hooks/use-debug";
 import { usePin } from "@/hooks/use-pin";
-import type { GPTSegment, GPTTranslation } from "@/models/translation";
+import type { GPTSegment, GPTTranscript } from "@/models/transcript";
 import { ViewText } from "./view-text";
 
 export const UploadForm = ({
@@ -21,50 +22,60 @@ export const UploadForm = ({
 }) => {
     const [form, setForm] = useState(new FormData());
     const [loadingProgress, setLoadingProgress] = useState(0);
-    const [text, setText] = useState("");
+    const [displayText, setDisplayText] = useState("");
     const ref = useRef<HTMLInputElement>(null);
     const debug = useDebug();
     const [file, setFile] = useState<FileList[number]>();
     const [pin, setPinValue] = usePin();
 
     const saveTranscript = async (
-        { text, segments }: GPTTranslation,
+        { segments, duration, text }: GPTTranscript,
         fileUrl: string,
     ) => {
         await axios("/api/translation", {
             method: "POST",
-            data: { text, fileUrl, segments },
+            data: { text, fileUrl, segments, duration },
         });
     };
 
     const upload = async () => {
-        const result = await axios<GPTTranslation>({
-            method: "post",
-            url: "https://api.openai.com/v1/audio/translations",
-            data: form,
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "multipart/form-data",
-            },
-            onUploadProgress(progressEvent) {
-                if (progressEvent.progress) {
-                    setLoadingProgress(progressEvent.progress * 100);
-                }
-            },
-        });
-        setText(result.data.text);
-        const { url } = await put(
-            `${String(Date.now())}-${file?.name}`,
-            // biome-ignore lint/style/noNonNullAssertion: allow this file
-            file!,
-            {
-                access: "public",
-                token: fileToken,
-            },
-        );
-        await saveTranscript(result.data, url);
-        console.log(url, "url");
-        setLoadingProgress(0);
+        try {
+            const result = await axios<GPTTranscript>({
+                method: "post",
+                url: "https://api.openai.com/v1/audio/translations",
+                data: form,
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "multipart/form-data",
+                },
+                onUploadProgress(progressEvent) {
+                    if (progressEvent.progress) {
+                        setLoadingProgress(progressEvent.progress * 100);
+                    }
+                },
+            });
+            setDisplayText(result.data.text);
+            const { url } = await put(
+                `${String(Date.now())}-${file?.name}`,
+                // biome-ignore lint/style/noNonNullAssertion: allow this file variable
+                file!,
+                {
+                    access: "public",
+                    token: fileToken,
+                },
+            );
+            await saveTranscript(result.data, url);
+            console.log(url, "url");
+            setLoadingProgress(0);
+        } catch (err) {
+            setLoadingProgress(0);
+            setFile(undefined);
+            addToast({
+                title: "Error",
+                description: "File is not uploaded. Refresh the page",
+                color: "danger",
+            });
+        }
         // reset file input
     };
 
@@ -84,6 +95,10 @@ export const UploadForm = ({
         newForm.append("model", "whisper-1");
         newForm.append("response_format", "verbose_json");
         setForm(newForm);
+        addToast({
+            title: "File added",
+            description: "Press Go to process the file",
+        });
     };
 
     const FileForm = () => (
@@ -154,7 +169,7 @@ export const UploadForm = ({
                 {loadingProgress === 100 && "Converting Audio to Text"}
             </h2>
 
-            <ViewText text={text} />
+            <ViewText text={displayText} />
         </>
     );
 };

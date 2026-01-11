@@ -1,3 +1,5 @@
+import type { Prisma } from "@/prisma/generated";
+
 export interface GPTSegment {
     avg_logprob: number;
     compression_ratio: number;
@@ -9,10 +11,12 @@ export interface GPTSegment {
     temperature: number;
     text: string;
 }
-export interface GPTTranslation {
+export interface GPTTranscript {
     duration: number;
     language: string;
     segments: GPTSegment[];
     task: string;
     text: string;
 }
+
+export type PrismaTranscript = Prisma.TranscriptGetPayload<null>;

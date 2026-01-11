@@ -4,15 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "bun run --bun next dev",
-    "build": "prisma generate && bun run --bun next build",
     "start": "bun next start",
+    "build": "prisma generate && bun run --bun next build",
     "lint": "eslint --fix",
     "generate": "prisma generate",
     "db:push": "prisma db push"
   },
   "dependencies": {
     "@heroui/button": "2.2.22",
+    "@heroui/card": "^2.2.27",
     "@heroui/code": "2.2.16",
+    "@heroui/divider": "^2.2.21",
     "@heroui/input": "2.4.22",
     "@heroui/input-otp": "^2.1.23",
     "@heroui/kbd": "2.2.17",
@@ -24,15 +26,19 @@
     "@heroui/switch": "2.2.20",
     "@heroui/system": "2.4.18",
     "@heroui/theme": "2.4.17",
+    "@heroui/toast": "^2.0.19",
     "@prisma/client": "6.6.0",
     "@react-aria/ssr": "3.9.9",
     "@react-aria/visually-hidden": "3.8.24",
     "@vercel/blob": "^1.1.1",
     "axios": "^1.10.0",
+    "baseline-browser-mapping": "^2.9.14",
+    "caniuse-lite": "^1.0.30001764",
     "clsx": "2.1.1",
     "framer-motion": "11.13.1",
     "intl-messageformat": "10.7.16",
     "lucide-react": "^0.561.0",
+    "moment": "^2.30.1",
     "next": "16.0.10",
     "next-themes": "0.4.6",
     "react": "18.3.1",
@@ -65,7 +71,8 @@
     "prisma": "6.6.0",
     "tailwind-variants": "0.3.0",
     "tailwindcss": "3.4.16",
-    "typescript": "5.6.3"
+    "typescript": "5.6.3",
+    "@types/bun": "latest"
   },
   "prisma": {
     "schema": "./prisma/schema.prisma"

@@ -5,7 +5,7 @@ import {
     NavbarContent,
     NavbarItem,
 } from "@heroui/navbar";
-import { Bookmark, House, NotebookPen, ScrollText } from "lucide-react";
+import { Bookmark, FileVolume, House, ScrollText } from "lucide-react";
 import { usePin } from "@/hooks/use-pin";
 
 export const Navbar = ({ envPin }: { envPin?: string }) => {
@@ -25,7 +25,7 @@ export const Navbar = ({ envPin }: { envPin?: string }) => {
                     {isAuth && (
                         <>
                             <Link href="/new-file">
-                                <NotebookPen width="50px" height="50px" />
+                                <FileVolume width="50px" height="50px" />
                             </Link>
                             <Link href="/transcripts">
                                 <ScrollText width="50px" height="50px" />
