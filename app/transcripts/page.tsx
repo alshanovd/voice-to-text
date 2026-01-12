@@ -6,9 +6,6 @@ import type { ReactNode } from "react";
 import type { PrismaTranscript } from "@/models/transcript";
 import prisma from "@/prisma/prisma";
 
-export const dynamic = "force-dynamic";
-export const runtime = "nodejs";
-
 export function Transcript({ t }: { t: PrismaTranscript }): ReactNode {
     const duration = moment.utc(0).seconds(t.duration).format("m:ss");
     const createdAt = moment(t.createdAt).format("DD MMM YYYY - HH:MM");
