@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     },
     description: "",
     icons: {
-        icon: "/favicon.ico",
+        icon: "/favicon.svg",
     },
 };
 

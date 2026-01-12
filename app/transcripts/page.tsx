@@ -11,7 +11,7 @@ export function Transcript({ t }: { t: PrismaTranscript }): ReactNode {
     const createdAt = moment(t.createdAt).format("DD MMM YYYY - HH:MM");
     return (
         <Link href={`/transcripts/${t.id}`}>
-            <Card className="max-w-[400px] hover:scale-105 hover:cursor-pointer hover:bg-default-100">
+            <Card className="max-w-[800px] hover:scale-105 hover:cursor-pointer hover:bg-default-100">
                 <CardHeader className="flex justify-between">
                     <div className="flex flex-col text-md">{createdAt}</div>
                     <div className="text-small text-default-500">
