@@ -2,6 +2,8 @@ import moment from "moment";
 import type { PrismaTranscript } from "@/models/transcript";
 import prisma from "@/prisma/prisma";
 
+export const dynamic = "force-dynamic";
+
 export default async function TranscriptPage({
     params,
 }: {
