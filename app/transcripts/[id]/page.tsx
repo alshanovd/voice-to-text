@@ -13,9 +13,7 @@ export default function TranscriptPage() {
     useEffect(() => {
         axios
             .get("/api/transcript", { params: { id } })
-            .then((data) => {
-                setT(data.data);
-            })
+            .then((data) => setT(data.data))
             .catch(() => addToast({ title: "Error on loading" }));
     }, [id]);
     // const { data, isFetching } = useQuery<{ data: PrismaTranscript }>({
