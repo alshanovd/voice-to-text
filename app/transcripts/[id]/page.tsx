@@ -3,6 +3,7 @@
 // import prisma from "@/prisma/prisma";
 
 export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export default async function TranscriptPage({
     params,
