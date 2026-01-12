@@ -1,5 +1,5 @@
 import moment from "moment";
-import type { PrismaTranscript } from "@/models/transcript";
+import { notFound } from "next/navigation";
 import prisma from "@/prisma/prisma";
 
 export const dynamic = "force-dynamic";
@@ -10,9 +10,12 @@ export default async function TranscriptPage({
     params: Promise<{ id: string }>;
 }) {
     const { id } = await params;
-    const t = (await prisma.transcript.findFirst({
+    const t = await prisma.transcript.findFirst({
         where: { id: Number(id) },
-    })) as PrismaTranscript;
+    });
+    if (!t) {
+        notFound();
+    }
     const duration = moment.utc(0).seconds(t.duration).format("m:ss");
     const createdAt = moment(t.createdAt).format("DD MMM YYYY HH:MM");
     return (
